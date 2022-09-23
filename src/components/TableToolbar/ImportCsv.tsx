@@ -87,10 +87,11 @@ export default function ImportCsv({ render, PopoverProps }: IImportCsvProps) {
             setError("No columns detected");
           } else {
             const mappedRows = rows.map((row: any) =>
-              row.reduce(
-                (a: any, c: any, i: number) => ({ ...a, [columns[i]]: c }),
-                {}
-              )
+            console.log(typeof row+" "+row.length+" "+row[1])
+            // row.reduce(
+              //   (a: any, c: any, i: number) => ({ ...a, [columns[i]]: c }),
+              //   {}
+              // )
             );
             setImportCsv({
               importType: importTypeRef.current,
@@ -108,6 +109,10 @@ export default function ImportCsv({ render, PopoverProps }: IImportCsvProps) {
       try {
         const file = acceptedFiles[0];
         const reader = new FileReader();
+        console.log(file);
+        console.log(typeof file);
+        // var buffer = fs.readFileSync(file);
+        // console.log(buffer);
         reader.onload = (event: any) => parseCsv(event.target.result);
         reader.readAsText(file);
         importTypeRef.current =

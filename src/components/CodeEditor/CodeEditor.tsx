@@ -84,6 +84,7 @@ export default function CodeEditor({
             </Toolbar>
           </AppBar>
         )}
+        
         <Editor
           defaultLanguage={defaultLanguage}
           value={initialEditorValue}
