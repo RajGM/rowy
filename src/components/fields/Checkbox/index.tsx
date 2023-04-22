@@ -15,6 +15,10 @@ const SideDrawerField = lazy(
     )
 );
 
+const Settings = lazy(
+  () => import("./Settings" /* webpackChunkName: "Settings-Percentage" */)
+);
+
 export const config: IFieldConfig = {
   type: FieldType.checkbox,
   name: "Toggle",
@@ -27,6 +31,7 @@ export const config: IFieldConfig = {
   TableCell: withRenderTableCell(DisplayCell, EditorCell, "inline", {
     usesRowData: true,
   }),
+  settings: Settings,
   csvImportParser: (value: string) => {
     if (["YES", "TRUE", "1"].includes(value.toUpperCase())) return true;
     else if (["NO", "FALSE", "0"].includes(value.toUpperCase())) return false;
