@@ -1,5 +1,4 @@
 import { IDisplayCellProps } from "@src/components/fields/types";
-
 import { FormControlLabel, Switch } from "@mui/material";
 
 export default function Checkbox({ column, value }: IDisplayCellProps) {

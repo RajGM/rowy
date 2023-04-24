@@ -5,6 +5,9 @@ import { get } from "lodash-es";
 import { FormControlLabel, Switch } from "@mui/material";
 import { projectScope, confirmDialogAtom } from "@src/atoms/projectScope";
 
+import { useTheme } from "@mui/material";
+import { resultBoolColorsScale } from "@src/utils/color";
+
 const replacer = (data: any) => (m: string, key: string) => {
   const objKey = key.split(":")[0];
   const defaultValue = key.split(":")[1] || "";
@@ -22,6 +25,15 @@ export default function Checkbox({
 }: IEditorCellProps) {
   const confirm = useSetAtom(confirmDialogAtom, projectScope);
 
+  const theme = useTheme();
+  const { colors } = (column as any).config;
+  const percentage = typeof value === "number" ? value : 0;
+  const finalColor = resultBoolColorsScale(
+    percentage,
+    colors,
+    theme.palette.background.paper
+  ).toHex();
+  
   const handleChange = () => {
     if (column?.config?.confirmation) {
       confirm({
@@ -44,13 +56,19 @@ export default function Checkbox({
   return (
     <FormControlLabel
       control={
-        <Switch
-          checked={!!value}
-          onChange={handleChange}
-          disabled={disabled}
-          color="success"
-          tabIndex={tabIndex}
-        />
+          <Switch
+            checked={!!value}
+            onChange={handleChange}
+            disabled={disabled}
+            tabIndex={tabIndex}
+            size="small"
+            sx={{
+              
+              
+             
+
+            }}
+          />
       }
       label={column.name as string}
       labelPlacement="start"

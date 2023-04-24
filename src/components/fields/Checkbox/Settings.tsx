@@ -15,16 +15,15 @@ import { ISettingsProps } from "@src/components/fields/types";
 
 import { Color, toColor } from "react-color-palette";
 import { fieldSx } from "@src/components/SideDrawer/utils";
-import { resultBoolColorsScale, defaultBoolColors } from "@src/utils/color";
+import { resultBoolColorsScale, defaultToggleButtonColor } from "@src/utils/color";
 import { numberToBoolean } from "./utils";
 
 const colorLabels: { [key: string]: string } = {
-    1: "True",
-    0: "False",
+    0: "ToggleButtonColor",
 };
 
 export default function Settings({ onChange, config }: ISettingsProps) {
-  const colors: string[] = config.colors ?? defaultBoolColors;
+  const colors: string[] = config.colors ?? defaultToggleButtonColor;
 
   const [checkStates, setCheckStates] = useState<boolean[]>(
     colors.map(Boolean)
@@ -33,7 +32,7 @@ export default function Settings({ onChange, config }: ISettingsProps) {
   const onCheckboxChange = (index: number, checked: boolean) => {
     onChange("colors")(
       colors.map((value: any, idx: number) =>
-        index === idx ? (checked ? value || defaultBoolColors[idx] : null) : value
+        index === idx ? (checked ? value || defaultToggleButtonColor[idx] : null) : value
       )
     );
     setCheckStates(
@@ -136,7 +135,7 @@ const Preview = ({ colors }: { colors: any }) => {
           textAlign: "center",
         }}
       >
-        {[1,0].map((value) => {
+        {[0].map((value) => {
           return (
             <Box
               sx={{
@@ -160,7 +159,7 @@ const Preview = ({ colors }: { colors: any }) => {
                 }}
               />
               <Typography style={{ position: "relative", zIndex: 1 }}>
-                {numberToBoolean(value)}
+                {numberToBoolean(1)}
               </Typography>
             </Box>
           );
